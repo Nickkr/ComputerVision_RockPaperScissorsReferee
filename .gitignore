@@ -1,0 +1,7 @@
+# IntelliJ project files
+.idea
+out
+gen
+
+# Exclude model
+hand/pose_iter_102000.caffemodel
