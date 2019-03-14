@@ -133,7 +133,6 @@ def evaluate(frame):
     t, _ = net.getPerfProfile()
     freq = cv2.getTickFrequency() / 100000
     cv2.putText(frame, '%.2fms' % (t / freq), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
-    classifyPose(points)
 
     return frame, points
 
@@ -163,11 +162,14 @@ while True:
         cropFirst = frame[58:420, 0:325]
         cropSecond = frame[58:420, 325:650]
 
+
+
         framePlayerOne, pointsPlayerOne = evaluate(cv2.flip(cropFirst, 1))
         framePlayerTwo, pointsPlayerTwo = evaluate(cropSecond)
 
         print("Points Player One: " + str(pointsPlayerOne))
         print("Points Player Two: " + str(pointsPlayerTwo))
+
         playerOnePose = classifyPose(pointsPlayerOne)
         playerTwoPose = classifyPose(pointsPlayerTwo)
         winner = evaluateGameRound(playerOnePose, playerTwoPose)
